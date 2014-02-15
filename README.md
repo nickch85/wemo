@@ -1,10 +1,10 @@
-WeMo Light Switch API
-=====================
+WeMo Devise API
+===============
 
 Some code snippets coppied from https://github.com/ballantyne/wemo and 
 https://github.com/bobbrodie/siriproxy-wemo
 
-Rewritten to use `upnp` because `simple_upnp` wasn't working for me.
+Rewritten to use `playful` because `simple_upnp` wasn't working for me.
 
 ## Usage
 
@@ -27,4 +27,14 @@ basement_floods.status
 # Turn it off
 #
 basement_floods.off
+
+# Get an outlet instead
+#
+outlets = WeMo.outlets.first
+
+# Get all WeMo devices on the network
+#
+WeMo.all
 ```
+
+Pull requests welcome :smile:
