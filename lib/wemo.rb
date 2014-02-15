@@ -1,20 +1,30 @@
-require 'bundler'
-Bundler.require
-require 'upnp/ssdp'
+require 'playful/ssdp'
 require 'wemo/device'
 
-UPnP.log = false
+Playful.log = false
 
 module WeMo
-  def self.light_switches
-    @devices ||= begin
-      devices = UPnP::SSDP.search('urn:Belkin:device:lightswitch:1')
-      devices.uniq.map do |device|
-        uri      = URI.parse(device[:location])
-        location = "#{uri.scheme}://#{uri.host}:#{uri.port}"
+  def self.all
+    light_switches + switches
+  end
 
-        Device.new(location)
-      end
+  def self.light_switches
+    @light_switches ||= devices("lightswitch")
+  end
+
+  def self.switches
+    @switches ||= devices("controllee")
+  end
+
+  private
+
+  def self.devices(type)
+    devices = Playful::SSDP.search("urn:Belkin:device:#{type}:1")
+    devices.uniq.map do |device|
+      uri      = URI.parse(device[:location])
+      location = "#{uri.scheme}://#{uri.host}:#{uri.port}"
+
+      Device.new(location)
     end
   end
 end

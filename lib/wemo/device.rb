@@ -1,3 +1,6 @@
+require 'rest-client'
+require 'crack'
+
 module WeMo
   class Device
     attr_reader :location

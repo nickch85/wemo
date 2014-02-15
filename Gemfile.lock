@@ -1,26 +1,22 @@
-GIT
-  remote: https://github.com/turboladen/upnp.git
-  revision: 6d535f81b50b68f98b97578cb97f0acf3133884c
+PATH
+  remote: .
   specs:
-    upnp (0.1.0)
-      em-http-request (>= 1.0.2)
-      em-synchrony
-      eventmachine (>= 1.0.0)
-      log_switch (>= 0.4.0)
-      nori (>= 2.0.2)
-      savon (~> 2.0)
+    wemo (0.0.1)
+      crack (~> 0.4.1)
+      playful (= 0.1.0.alpha.1)
+      rest-client (~> 1.6.7)
 
 GEM
   remote: https://rubygems.org/
   specs:
     addressable (2.3.5)
-    akami (1.2.0)
+    akami (1.2.1)
       gyoku (>= 0.4.0)
-      nokogiri (>= 1.4.0)
+      nokogiri
     builder (3.2.2)
     cookiejar (0.3.0)
-    crack (0.4.1)
-      safe_yaml (~> 0.9.0)
+    crack (0.4.2)
+      safe_yaml (~> 1.0.0)
     em-http-request (1.1.2)
       addressable (>= 2.3.4)
       cookiejar
@@ -32,38 +28,45 @@ GEM
     em-synchrony (1.0.3)
       eventmachine (>= 1.0.0.beta.1)
     eventmachine (1.0.3)
-    gyoku (1.0.0)
+    gyoku (1.1.1)
       builder (>= 2.1.2)
     http_parser.rb (0.6.0)
-    httpi (2.0.2)
+    httpi (2.1.0)
       rack
+      rubyntlm (~> 0.3.2)
     log_switch (0.4.0)
-    mime-types (2.0)
+    mime-types (1.25.1)
     mini_portile (0.5.2)
     nokogiri (1.6.1)
       mini_portile (~> 0.5.0)
-    nori (2.1.0)
+    nori (2.3.0)
+    playful (0.1.0.alpha.1)
+      em-http-request (>= 1.0.2)
+      em-synchrony
+      eventmachine (>= 1.0.0)
+      log_switch (>= 0.4.0)
+      nori (>= 2.0.2)
+      savon (~> 2.0)
     rack (1.5.2)
     rest-client (1.6.7)
       mime-types (>= 1.16)
-    safe_yaml (0.9.7)
-    savon (2.2.0)
+    rubyntlm (0.3.4)
+    safe_yaml (1.0.1)
+    savon (2.3.3)
       akami (~> 1.2.0)
       builder (>= 2.1.2)
-      gyoku (~> 1.0.0)
-      httpi (~> 2.0.2)
+      gyoku (~> 1.1.0)
+      httpi (~> 2.1.0)
       nokogiri (>= 1.4.0)
-      nori (~> 2.1.0)
-      wasabi (~> 3.1.0)
-    wasabi (3.1.0)
+      nori (~> 2.3.0)
+      wasabi (~> 3.2.2)
+    wasabi (3.2.3)
       httpi (~> 2.0)
+      mime-types (< 2.0.0)
       nokogiri (>= 1.4.0)
 
 PLATFORMS
   ruby
 
 DEPENDENCIES
-  builder
-  crack
-  rest-client
-  upnp!
+  wemo!
