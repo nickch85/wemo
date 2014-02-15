@@ -1,4 +1,4 @@
-WeMo Devise API
+WeMo Device API
 ===============
 
 Some code snippets coppied from https://github.com/ballantyne/wemo and 
