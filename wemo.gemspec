@@ -17,6 +17,7 @@ Gem::Specification.new do |s|
     %w{README.md LICENSE}
 
   s.add_dependency "playful",     "= 0.1.0.alpha.1"
+  s.add_dependency "log_switch",  "0.4.0"
   s.add_dependency "crack",       "~> 0.4.1"
   s.add_dependency "rest-client", "~> 1.6.7"
 end
