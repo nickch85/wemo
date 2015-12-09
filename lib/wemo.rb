@@ -5,7 +5,7 @@ Playful.log = false
 
 module WeMo
   def self.all
-    light_switches + switches
+    light_switches + switches + sensors
   end
 
   def self.light_switches
@@ -14,6 +14,10 @@ module WeMo
 
   def self.switches
     @switches ||= devices("controllee")
+  end
+  
+  def self.sensors
+    @sensors ||= devices("sensors")
   end
 
   private
