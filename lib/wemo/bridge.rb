@@ -1,14 +1,16 @@
 require 'rest-client'
 require 'crack'
 require 'builder'
+require 'wemo/light'
 
 
 module WeMo
   class Bridge
-    attr_reader :location
+    attr_reader :location, :lights
 
     def initialize(location)
       @location = location
+      get_lights
     end
 
     def name
@@ -27,8 +29,11 @@ module WeMo
       get_binary_state
     end
 
-    def devices
-      get_end_devices
+    def get_lights
+      xml = Crack::XML.parse(get_end_devices["s:Envelope"]["s:Body"]["u:GetEndDevicesResponse"]["DeviceLists"])
+      xml["DeviceLists"]["DeviceList"]["DeviceInfos"].each do |x|
+        l =Light.new(x["FriendlyName"], x["DeviceID"], x["CurrentState"])
+      end
     end
 
     def to_s
@@ -62,7 +67,7 @@ module WeMo
       result = make_request path, soap_action, request
       ap result
       xml = Crack::XML.parse(result)
-      xml["s:Envelope"]["s:Body"]["u:SetBinaryStateResponse"]["BinaryState"] == "1"
+      return xml
    end
 
     def set_binary_state(signal)
