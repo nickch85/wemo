@@ -2,8 +2,9 @@ require 'rest-client'
 require 'crack'
 require 'builder'
 
+
 module WeMo
-  class Device
+  class Bridge
     attr_reader :location
 
     def initialize(location)
@@ -18,8 +19,16 @@ module WeMo
       device_info["device"]["modelName"]
     end
 
+    def udn
+      device_info["device"]["UDN"]
+    end
+
     def status
       get_binary_state
+    end
+
+    def devices
+      get_end_devices
     end
 
     def to_s
@@ -34,7 +43,27 @@ module WeMo
       set_binary_state 0
     end
 
-    private
+   private
+
+   def get_end_devices
+      soap_action = '"urn:Belkin:service:bridge:1#GetEndDevices"'
+      path = "upnp/control/bridge1"
+      request = ''
+      x = ::Builder::XmlMarkup.new :target => request
+      x.instruct! :xml, :version => "1.0"
+      x.s :Envelope, "xmlns:s" => "http://schemas.xmlsoap.org/soap/envelope/", "s:encodingStyle" => "http://schemas.xmlsoap.org/soap/encoding/" do
+        x.s :Body do
+          x.u :GetEndDevices, "xmlns:u"=>"urn:Belkin:service:bridge:1" do
+            x.DevUDN self.udn
+            x.ReqListType 'PAIRED_LIST'
+          end
+        end
+      end
+      result = make_request path, soap_action, request
+      ap result
+      xml = Crack::XML.parse(result)
+      xml["s:Envelope"]["s:Body"]["u:SetBinaryStateResponse"]["BinaryState"] == "1"
+   end
 
     def set_binary_state(signal)
       soap_action = '"urn:Belkin:service:basicevent:1#SetBinaryState"'

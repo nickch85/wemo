@@ -20,4 +20,5 @@ Gem::Specification.new do |s|
   s.add_dependency "log_switch",  "0.4.0"
   s.add_dependency "crack",       "~> 0.4.1"
   s.add_dependency "rest-client", "~> 1.6.7"
+  s.add_dependency "builder", "3.2.2"
 end
