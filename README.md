@@ -1,7 +1,7 @@
 WeMo Device API
 ===============
 
-Some code snippets coppied from https://github.com/ballantyne/wemo and 
+Some code snippets coppied from https://github.com/ballantyne/wemo and
 https://github.com/bobbrodie/siriproxy-wemo
 
 Rewritten to use `playful` because `simple_upnp` wasn't working for me.
@@ -38,3 +38,13 @@ WeMo.all
 ```
 
 Pull requests welcome :smile:
+
+
+
+
+Nick: TODO
+=================
+WeMo Link: Implement End Device and Group GetStatus
+WeMo Link: Implement Pretty Names and Group Statuses
+
+
