@@ -6,7 +6,7 @@ Playful.log = false
 
 module WeMo
   def self.all
-    light_switches + switches + sensors
+    light_switches + switches + sensors + bridges.collect(&:devices).flatten
   end
 
   def self.light_switches

@@ -20,17 +20,16 @@ module WeMo
       xml = Crack::XML.parse(get_end_devices["s:Envelope"]["s:Body"]["u:GetEndDevicesResponse"]["DeviceLists"])
 
       devices = []
-
       if xml["DeviceLists"]["DeviceList"]["DeviceInfos"]
         xml["DeviceLists"]["DeviceList"]["DeviceInfos"]["DeviceInfo"].each do |x|
           devices << EndDevice.new(x, @location)
         end
       end
+      # Not sure if a single WeMo Link can support more than 1 group
       if xml["DeviceLists"]["DeviceList"]["GroupInfos"]
         x = xml["DeviceLists"]["DeviceList"]["GroupInfos"]["GroupInfo"]
         devices << Group.new(x, @location)
       end
-
       devices
     end
 
@@ -51,9 +50,9 @@ module WeMo
     end
 
 
-   private
+    private
 
-   def get_end_devices
+    def get_end_devices
       soap_action = %Q|"#{URN}#GetEndDevices"|
       request = ''
       x = ::Builder::XmlMarkup.new :target => request
@@ -69,7 +68,7 @@ module WeMo
       result = make_request soap_action, request
       xml = Crack::XML.parse(result)
       return xml
-   end
+    end
 
     def device_info
       @device_info ||= Crack::XML.parse(rest_client["setup.xml"].get)["root"]

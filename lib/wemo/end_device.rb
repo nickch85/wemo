@@ -13,9 +13,18 @@ module WeMo
     def initialize(x, location)
       @location = location
       @name = x["FriendlyName"]
+      @product = x["productName"]
       @device_id = x["DeviceID"]
-      @state = x["CurrentState"].split(",")
       @capabilites = x["CapabilityIDs"].split(",")
+      @capability_values = x["CurrentState"].split(",")
+    end
+
+    def model_name
+      @product
+    end
+
+    def to_s
+      "<#{@product}> #{@name}"
     end
 
     def can_dim?
@@ -34,9 +43,9 @@ module WeMo
       set_device_status('10006', 0)
     end
 
-    def dim(fraction)
+    def dim(fraction, fade_time=5)
       value = fraction * 255
-      set_device_status('10008', "#{value}:5")
+      set_device_status('10008', "#{value}:#{fade_time}")
     end
 
 
