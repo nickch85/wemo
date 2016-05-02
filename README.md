@@ -46,5 +46,6 @@ Nick: TODO
 =================
 WeMo Link: Implement End Device and Group GetStatus
 WeMo Link: Implement Pretty Names and Group Statuses
-
+Implement Lightbulb capabilities: Change colour
+Update README with additional code snippets and describe Bridge -> Device (EndDevice & Group status)
 
