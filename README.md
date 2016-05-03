@@ -45,7 +45,7 @@ light_group.status
 #    "30008" => "0:0", # sleep timer
 #    "30009" => nil,
 #    "3000A" => nil
-}
+#}
 
 
 # Turn it off
@@ -73,13 +73,9 @@ outlets = WeMo.outlets.first
 WeMo.all
 ```
 
-Pull requests welcome :smile:
-
-
-
 
 Nick: TODO
-=================
+-------------
 Implement Lightbulb capabilities: Change colour
 
 
