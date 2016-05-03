@@ -14,7 +14,7 @@ module WeMo
   end
 
   def self.bridges
-    @links ||= services("bridge")
+    @bridges ||= services("bridge")
   end
 
   def self.switches
@@ -23,6 +23,18 @@ module WeMo
 
   def self.sensors
     @sensors ||= devices("sensors")
+  end
+
+  def self.rescan()
+    clear
+    all
+  end
+
+  def self.clear
+    @light_switches = nil
+    @bridges = nil
+    @switches = nil
+    @sensors = nil
   end
 
   private
