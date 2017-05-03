@@ -19,6 +19,10 @@ module WeMo
       set_capabilities(x["GroupCapabilityIDs"], x["GroupCapabilityValues"])
     end
 
+    def name
+      @name
+    end
+
     def model_name
       @product
     end

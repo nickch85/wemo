@@ -44,14 +44,13 @@ module WeMo
     devices.uniq.map do |device|
       uri      = URI.parse(device[:location])
       location = "#{uri.scheme}://#{uri.host}:#{uri.port}"
-
       Device.new(location)
     end
   end
 
   def self.services(type)
     devices = Playful::SSDP.search("urn:Belkin:service:#{type}:1")
-    devices.uniq.map do |device|
+    devices.uniq{|d| d[:usn]}.map do |device|
       uri      = URI.parse(device[:location])
       location = "#{uri.scheme}://#{uri.host}:#{uri.port}"
 

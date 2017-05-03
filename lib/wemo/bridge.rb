@@ -13,7 +13,6 @@ module WeMo
 
     def initialize(location)
       @location = location
-
     end
 
     def devices
@@ -26,9 +25,11 @@ module WeMo
         end
       end
       # Not sure if a single WeMo Link can support more than 1 group
+      # 03/05/2017: Looks like it does. patched to iterate through multiple groups
       if xml["DeviceLists"]["DeviceList"]["GroupInfos"]
-        x = xml["DeviceLists"]["DeviceList"]["GroupInfos"]["GroupInfo"]
-        devices << Group.new(x, @location)
+        xml["DeviceLists"]["DeviceList"]["GroupInfos"]["GroupInfo"].each do |group_info|
+          devices << Group.new(group_info, @location) unless group_info["DeviceInfos"].nil?
+        end
       end
       devices
     end
